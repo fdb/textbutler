@@ -20,6 +20,12 @@ Also, it has the cutest menu bar icon:
 
 ![TextButler Menu Bar Icon](https://raw.githubusercontent.com/fdb/textbutler/master/artwork/menubar.png)
 
+## Download
+
+Download the ZIP file from the [releases page](https://github.com/fdb/textbutler/releases).
+
+**The releases are currently unsigned. Once downloaded, right-click the app and choose "Open".**
+
 ## Building on macOS Sierra
 
     git clone https://github.com/fdb/textbutler.git
