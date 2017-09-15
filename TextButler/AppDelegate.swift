@@ -88,13 +88,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.terminate(self)
         }
     }
-
-    func reloadSnippetsFile() {
+    
+    func snippetsFile() -> URL {
         let user = ProcessInfo().environment["USER"]!
         let usersDir = FileManager.default.urls(for: .userDirectory, in: .localDomainMask).first!
         let homeDir = usersDir.appendingPathComponent(user)
         let file = homeDir.appendingPathComponent(".textbutler.json")
-        
+        return file
+    }
+    
+    func ensureSnippetsFile() {
+        let file = snippetsFile()
+        if !FileManager.default.fileExists(atPath: file.absoluteString) {
+            let defaultFile = Bundle.main.url(forResource: "textbutler-default", withExtension: "json")!
+            do {
+                try FileManager.default.copyItem(at: defaultFile, to: file)
+            } catch let error {
+                print("Could not copy file \(defaultFile) to \(file): \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func reloadSnippetsFile() {
+        let file = snippetsFile()
         snippets.removeAll()
         let str: String
         do {
@@ -161,6 +177,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         checkIfAccessibilityEnabled()
+        ensureSnippetsFile()
         reloadSnippetsFile()
         initializeStatusMenu()
         enableMonitor()

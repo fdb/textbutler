@@ -42,8 +42,6 @@ Application installation is quite involved right now. I'm working on improving t
     ]
 
 ## TODO
-- Create a default file when nothing is available.
-- Warn the user to enable TextButler in the accessibility settings.
 - Watch the ~/.textbutler.json file for updates, and reload the snippets as needed (you can now manually reload from the menu).
 - Allow the user to edit the snippets file in TextEdit.
 - Allow the user to edit the snippets in a custom GUI.
