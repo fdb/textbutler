@@ -77,6 +77,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button!.image = NSImage.init(named: "MenuIcon")
     }
     
+    func checkIfAccessibilityEnabled() {
+        if !AXIsProcessTrusted() {
+            let alert = NSAlert.init()
+            alert.addButton(withTitle: "Quit")
+            alert.messageText = "Enable access for assistive devices."
+            alert.informativeText = "TextButler needs access for assistive devices. Please enable it in the System Preferences."
+            alert.alertStyle = NSAlertStyle.critical
+            alert.runModal()
+            NSApp.terminate(self)
+        }
+    }
+
     func reloadSnippetsFile() {
         let user = ProcessInfo().environment["USER"]!
         let usersDir = FileManager.default.urls(for: .userDirectory, in: .localDomainMask).first!
@@ -148,10 +160,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        checkIfAccessibilityEnabled()
         reloadSnippetsFile()
         initializeStatusMenu()
         enableMonitor()
-        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
