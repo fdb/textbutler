@@ -14,7 +14,7 @@ TextButler sits in your menubar and listens for keyboard shortcuts that you have
 >
 > ThingCo Support Staff
 
-You can set it up to just write `;fwdsupp`, and let TextButler type the full text automatically.
+You can set it up to just write `;fwdsupp` and let TextButler type the full text automatically.
 
 Also, it has the cutest menu bar icon:
 
@@ -42,6 +42,9 @@ Application installation is quite involved right now. I'm working on improving t
     ]
 
 ## TODO
-- Watch the ~/.textbutler.json file for updates, and reload the snippets as needed.
-- Allow the user to edit the snippets file.
 - Create a default file when nothing is available.
+- Warn the user to enable TextButler in the accessibility settings.
+- Watch the ~/.textbutler.json file for updates, and reload the snippets as needed (you can now manually reload from the menu).
+- Allow the user to edit the snippets file in TextEdit.
+- Allow the user to edit the snippets in a custom GUI.
+- Allow snippets to control customer placement (e.g. between HTML tags).
