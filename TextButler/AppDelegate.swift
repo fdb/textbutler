@@ -89,18 +89,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func appDir() -> URL {
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let appDir = documentsDir.appendingPathComponent("TextButler")
+        return appDir
+    }
+    
     func snippetsFile() -> URL {
-        let user = ProcessInfo().environment["USER"]!
-        let usersDir = FileManager.default.urls(for: .userDirectory, in: .localDomainMask).first!
-        let homeDir = usersDir.appendingPathComponent(user)
-        let file = homeDir.appendingPathComponent(".textbutler.json")
+        let file = appDir().appendingPathComponent("snippets.json")
         return file
+    }
+    
+    func ensureAppDirectory() {
+        let dir = appDir()
+        if !FileManager.default.fileExists(atPath: dir.path) {
+            do {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true, attributes: nil)
+            } catch let error {
+                print("Could not create TextButler directory (\(dir.path)): \(error.localizedDescription)")
+            }
+        }
     }
     
     func ensureSnippetsFile() {
         let file = snippetsFile()
-        if !FileManager.default.fileExists(atPath: file.absoluteString) {
-            let defaultFile = Bundle.main.url(forResource: "textbutler-default", withExtension: "json")!
+        if !FileManager.default.fileExists(atPath: file.path) {
+            let defaultFile = Bundle.main.url(forResource: "default-snippets", withExtension: "json")!
             do {
                 try FileManager.default.copyItem(at: defaultFile, to: file)
             } catch let error {
@@ -109,14 +123,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func reloadSnippetsFile() {
+    func reloadSnippetsFile(showNotification: Bool = false) {
         let file = snippetsFile()
         snippets.removeAll()
         let str: String
         do {
             str = try String(contentsOf: file, encoding: String.Encoding.utf8)
         } catch {
-            print("Failed to load .textbutler.json: \(error.localizedDescription)")
+            print("Failed to load snippets.json: \(error.localizedDescription)")
             str = "[]"
         }
         let data = str.data(using: String.Encoding.utf8, allowLossyConversion: false)!
@@ -131,9 +145,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     longestShortcutLength = shortcut.characters.count
                 }
             }
-        } catch let error as NSError {
+        } catch let error {
             print("Failed to load: \(error.localizedDescription)")
         }
+        
+        if showNotification {
+            let notification = NSUserNotification()
+            notification.title = "TextButler"
+            notification.informativeText = "Reloaded snippets file."
+            NSUserNotificationCenter.default.deliver(notification)
+        }
+    }
+
+    func startWatchingSnippetsFile() {
+        
+        func callback(
+            _ stream: ConstFSEventStreamRef,
+            clientCallbackInfo: UnsafeMutableRawPointer?,
+            numEvents: Int,
+            eventPaths: UnsafeMutableRawPointer,
+            eventFlags: UnsafePointer<FSEventStreamEventFlags>?,
+            eventIDs: UnsafePointer<FSEventStreamEventId>?) -> Void {
+            //if let paths = unsafeBitCast(eventPaths, to: NSArray.self) as? [String] {
+            //    print("paths \(paths)")
+            //}
+            let appDelegate = unsafeBitCast(clientCallbackInfo, to: AppDelegate.self)
+            appDelegate.reloadSnippetsFile(showNotification: true)
+        }
+        
+        var context = FSEventStreamContext()
+        context.info = unsafeBitCast(self, to: UnsafeMutableRawPointer.self)
+        let paths = [snippetsFile().path]
+        
+        let flags = UInt32(kFSEventStreamCreateFlagUseCFTypes | kFSEventStreamCreateFlagFileEvents)
+        
+        let stream = FSEventStreamCreate(kCFAllocatorDefault, callback, &context, paths as CFArray, FSEventStreamEventId(kFSEventStreamEventIdSinceNow), TimeInterval(0.2), flags)!
+        FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
+        FSEventStreamStart(stream)
     }
     
     func enableMonitor() {
@@ -160,15 +208,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    @IBAction func reload(_ sender: AnyObject) {
-        reloadSnippetsFile()
-        
-        let notification = NSUserNotification()
-        notification.title = "TextButler"
-        notification.informativeText = "Has Reloaded"
-        notification.soundName = NSUserNotificationDefaultSoundName
-        NSUserNotificationCenter.default.deliver(notification)
-        
+    @IBAction func openSnippetsFile(_ sender: AnyObject) {
+        let p = Process()
+        p.launchPath = "/usr/bin/open"
+        p.arguments = ["-e", snippetsFile().path]
+        p.launch()
     }
     
     @IBAction func quit(_ sender: AnyObject) {
@@ -177,8 +221,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         checkIfAccessibilityEnabled()
+        ensureAppDirectory()
         ensureSnippetsFile()
         reloadSnippetsFile()
+        startWatchingSnippetsFile()
         initializeStatusMenu()
         enableMonitor()
     }

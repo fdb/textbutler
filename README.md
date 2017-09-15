@@ -20,15 +20,16 @@ Also, it has the cutest menu bar icon:
 
 ![TextButler Menu Bar Icon](https://raw.githubusercontent.com/fdb/textbutler/master/artwork/menubar.png)
 
-## Installation
-Application installation is quite involved right now. I'm working on improving this.
+## Building on macOS Sierra
 
-- Create a file called ~/.textbutler.json.
-- Fill it with snippets in the form shown below.
-- Run the application once, then quit it.
-- Go to System Preferences > Security > Privacy > Accessibility and enable TextButler.
+    git clone https://github.com/fdb/textbutler.git
+    cd textbutler
+    xcodebuild
+    open build/Release/TextButler.app
 
-## Example ~/.textbutler.json file
+## Example snippets file
+
+Snippets are stored under `/Users/username/Documents/TextButler/snippets.json`. Changes are automatically picked up.
 
     [
         {
@@ -42,11 +43,10 @@ Application installation is quite involved right now. I'm working on improving t
     ]
 
 ## TODO
-- Watch the ~/.textbutler.json file for updates, and reload the snippets as needed (you can now manually reload from the menu).
-- Allow the user to edit the snippets file in TextEdit.
 - Allow the user to edit the snippets in a custom GUI.
 - Allow snippets to control customer placement (e.g. between HTML tags).
 - Add an option to start the application at login.
 - Welcome screen explaining where to find snippet file, how to do expansions.
 - Create (signed) releases of the application.
 - Customizable location for snippets file.
+- Make the icon a bit smaller.

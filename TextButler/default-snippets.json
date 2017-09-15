@@ -8,6 +8,10 @@
         "text": "johndoe@example.com"
     },
     {
+        "shortcut": ";tel",
+        "text": "+1 555 123 5678"
+    },
+    {
         "shortcut": ",dt",
         "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width\">\n    <title>Document</title>\n</head><body>\n\n\n</body></html>"
     }

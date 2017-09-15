@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6179A6221F6C28C40059680A /* textbutler-default.json in Resources */ = {isa = PBXBuildFile; fileRef = 6179A6211F6C28C40059680A /* textbutler-default.json */; };
+		6179A6221F6C28C40059680A /* default-snippets.json in Resources */ = {isa = PBXBuildFile; fileRef = 6179A6211F6C28C40059680A /* default-snippets.json */; };
 		61DEED3F1F6BFDFF00958DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DEED3E1F6BFDFF00958DAF /* AppDelegate.swift */; };
 		61DEED411F6BFDFF00958DAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DEED401F6BFDFF00958DAF /* ViewController.swift */; };
 		61DEED431F6BFDFF00958DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61DEED421F6BFDFF00958DAF /* Assets.xcassets */; };
@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6179A6211F6C28C40059680A /* textbutler-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "textbutler-default.json"; sourceTree = "<group>"; };
+		6179A6211F6C28C40059680A /* default-snippets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "default-snippets.json"; sourceTree = "<group>"; };
 		61DEED3B1F6BFDFF00958DAF /* TextButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61DEED3E1F6BFDFF00958DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61DEED401F6BFDFF00958DAF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 				61DEED421F6BFDFF00958DAF /* Assets.xcassets */,
 				61DEED471F6BFDFF00958DAF /* Info.plist */,
 				61DEED4D1F6BFF5400958DAF /* MainMenu.xib */,
-				6179A6211F6C28C40059680A /* textbutler-default.json */,
+				6179A6211F6C28C40059680A /* default-snippets.json */,
 			);
 			path = TextButler;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 			files = (
 				61DEED431F6BFDFF00958DAF /* Assets.xcassets in Resources */,
 				61DEED4E1F6BFF5400958DAF /* MainMenu.xib in Resources */,
-				6179A6221F6C28C40059680A /* textbutler-default.json in Resources */,
+				6179A6221F6C28C40059680A /* default-snippets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

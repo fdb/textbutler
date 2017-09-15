@@ -688,10 +688,10 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="ft4-Ol-SaK"/>
-                <menuItem title="Reload" id="DOO-K0-7zc">
+                <menuItem title="Open Snippets File…" id="RDt-EW-gVF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="reload:" target="4aY-nU-b3Z" id="FR3-1P-rRd"/>
+                        <action selector="openSnippetsFile:" target="4aY-nU-b3Z" id="PUQ-UD-wlf"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="5fa-v3-SRE"/>
