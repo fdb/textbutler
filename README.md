@@ -7,14 +7,18 @@ Auto-completing text utility for macOS.
 TextButler sits in your menubar and listens for keyboard shortcuts that you have defined. It then quickly fills in the text of your choosing. So, instead of typing:
 
 > Dear Customer,
->   
+>
 > Thank you so much for your question. I've forwarded this to our customer support and they will look at it as soon as possible.
->  
+>
 > Kind regards,
->    
+>
 > ThingCo Support Staff
-    
+
 You can set it up to just write `;fwdsupp`, and let TextButler type the full text automatically.
+
+Also, it has the cutest menu bar icon:
+
+![TextButler Menu Bar Icon](https://raw.githubusercontent.com/fdb/textbutler/master/artwork/menubar.png)
 
 ## Installation
 Application installation is quite involved right now. I'm working on improving this.
