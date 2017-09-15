@@ -48,3 +48,5 @@ Application installation is quite involved right now. I'm working on improving t
 - Allow the user to edit the snippets file in TextEdit.
 - Allow the user to edit the snippets in a custom GUI.
 - Allow snippets to control customer placement (e.g. between HTML tags).
+- Add an option to start the application at login.
+
