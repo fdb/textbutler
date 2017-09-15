@@ -48,4 +48,4 @@ Application installation is quite involved right now. I'm working on improving t
 - Allow snippets to control customer placement (e.g. between HTML tags).
 - Add an option to start the application at login.
 - Welcome screen explaining where to find snippet file, how to do expansions.
-
+- Create (signed) releases of the application.
