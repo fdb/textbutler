@@ -2,7 +2,7 @@
 
 Auto-completing text utility for macOS.
 
-![TextButler Icon](https://raw.githubusercontent.com/fdb/textbutler/master/artwork/icon-512.png)
+![TextButler Icon](https://raw.githubusercontent.com/fdb/textbutler/master/artwork/icon-256.png)
 
 TextButler sits in your menubar and listens for keyboard shortcuts that you have defined. It then quickly fills in the text of your choosing. So, instead of typing:
 
