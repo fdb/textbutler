@@ -80,11 +80,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func checkIfAccessibilityEnabled() {
         if !AXIsProcessTrusted() {
             let alert = NSAlert.init()
-            alert.addButton(withTitle: "Quit")
-            alert.messageText = "Enable access for assistive devices."
-            alert.informativeText = "TextButler needs access for assistive devices. Please enable it in the System Preferences."
+            alert.addButton(withTitle: "Open Security & Privacy Settings…")
+            alert.messageText = "TextButler Requires Accessibility Access."
+            alert.informativeText = "TextButler needs accessibility settings to read global keystrokes.\n\nPlease go to the Security & Privacy settings pane and check TextButler under Accessibility. You may need to click the lock button first.\n\nTextButler will quit now."
             alert.alertStyle = NSAlertStyle.critical
             alert.runModal()
+            
+            let p = Process()
+            p.launchPath = "/usr/bin/open"
+            p.arguments = ["x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"]
+            p.launch()
+            
             NSApp.terminate(self)
         }
     }
