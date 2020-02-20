@@ -53,6 +53,6 @@ Snippets are stored under `/Users/username/Documents/TextButler/snippets.json`. 
 - Allow snippets to control customer placement (e.g. between HTML tags).
 - Add an option to start the application at login.
 - Welcome screen explaining where to find snippet file, how to do expansions.
-- Create (signed) releases of the application.
+- Create signed releases of the application.
 - Customizable location for snippets file.
-- Make the icon a bit smaller.
+- Remove icon from dock.
